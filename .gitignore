@@ -1,0 +1,15 @@
+obj/
+[Bb]in
+[Dd]ebug*/
+*.log
+*.bak
+*.cache
+*.suo
+*.user
+*.svn-base
+*.svn*
+*UXGuild*/
+MVCTemplate/
+CBDS/
+*.ncrunchproject
+TestResults/

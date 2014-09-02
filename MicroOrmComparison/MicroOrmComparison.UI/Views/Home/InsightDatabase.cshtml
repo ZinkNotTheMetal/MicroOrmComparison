@@ -1,0 +1,121 @@
+﻿<div class="jumbotron">
+    <h1>Insight.Database</h1>
+    <p class="lead text-muted">
+        Insight.Database is the .NET micro-ORM that nobody knows about because it's so easy, 
+        automatic, and fast, (and well-documented) that nobody asks questions about it on StackOverflow.
+        <br/><br/>
+        <a href="https://github.com/jonwagner/Insight.Database/wiki/Stored-Procedures-vs-SQL-Text">Stored Procedures vs SQL using Insight.Database</a>
+    </p>
+    <p>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="https://github.com/jonwagner/Insight.Database" class="btn btn-primary">Learn more &raquo;</a>
+            </div>
+            <div class="col-md-offset-8">
+                <a href="@Url.Action("OrmLite", "Home")" class="right btn btn-success">Is there anything that isn't like Dapper?</a>
+            </div>
+        </div>
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-success">Advantages to using Insight.Database</h2>
+        <ul>
+            <li><b>Can handle nested objects</b></li>
+            <li>No mapping code</li>
+            <li>Connection.As&lt;IEmployeeRepository&gt;();</li>
+            <li>Multiple Result Sets</li>
+            <li>Does not need a using statement for Multipe Result Sets</li>
+            <li>Hadles stored procedures by default but can also do SQL</li>
+            <li>Many DB Vendors supported</li>
+            <li>Many to many relationships supported as of v4.0</li>
+            <li>Very similar to Dapper</li>
+            <li>Opens and closes the connection automatically</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-2" href="">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-1">&nbsp;</div>
+    <div class="col-md-5">
+        <h2 class="text-danger">Disadvantages to using Insight.Database</h2>
+        <ul>
+            <li>Similar to Dapper (which is much more common)</li>
+            <li>Documentation is weaker (but you can look up Dapper's implementaion)</li>
+            <li><b>Prefers MS SQL to other vendors</b></li>
+            <li>No specific helpers for Update/Select/Insert/Delete</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-2" href="https://github.com/jonwagner/Insight.Database/wiki/Insight-v-Dapper">Learn more &raquo;</a></p>
+    </div>
+</div>
+<div class="page-header">
+    <h2>Code examples</h2>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <h3>Code using Stored Procedures</h3>
+        <h4>Open Connection</h4>
+        <pre>
+            <code data-language="csharp">var _db = new SqlConnection(
+ConfigurationManager.ConnectionStrings["EmployeeDB"]
+    .ConnectionString);</code>
+        </pre>
+        <h4>GetById()</h4>
+        <pre>
+            <code data-language="csharp">return _db.Single&lt;Employee&gt;("GetEmployeeById", 
+    new {@@Id = employeeId});</code>
+        </pre>
+        <h4>GetAll()</h4>
+        <pre>
+            <code data-language="csharp">return _db.Query&lt;Employee&gt;("GetAllEmployees");</code>
+        </pre>
+        <h4>Add()</h4>
+        <pre>
+            <code data-language="csharp">employee.Id = _db.Query&lt;Employee&gt;("InsertNewEmployee",
+    employee).Single();</code>
+        </pre>
+        <h4>Update()</h4>
+        <pre>
+            <code data-language="csharp">_db.Execute("UpdateEmployeeInfo", employee);</code>
+        </pre>
+    </div>
+    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md-5">
+        <h3>Code using SQL</h3>
+        <h4>Open Connection</h4>
+        <pre>
+            <code data-language="csharp">var _db = new SqlConnection(
+ConfigurationManager.ConnectionStrings["EmployeeDB"]
+    .ConnectionString);</code>
+        </pre>
+        <h4>GetById()</h4>
+        <pre>
+            <code data-language="csharp">return _db.SingleSql&lt;Employee&gt;(
+    "Select * FROM Employees Where Id = @@Id", 
+    new { @@Id = employeeId });</code>
+        </pre>
+        <h4>GetAll()</h4>
+        <pre>
+            <code data-language="csharp">return _db.QuerySql&lt;Employee&gt;(
+    "Select * FROM Employees");</code>
+        </pre>
+        <h4>Add()</h4>
+        <pre>
+            <code data-language="csharp">const string sql = "INSERT INTO Employees " +
+"(FirstName, LastName, Email, DepartmentId) VALUES " +
+"(@@FirstName, @@LastName, @@Email, @@DepartmentId);" +
+    "SELECT CAST(SCOPE_IDENTITY() as int)";
+employee.Id = _db.QuerySql&lt;int&gt;(sql, employee)
+    .Single();</code>
+        </pre>
+        <h4>Update()</h4>
+        <pre>
+            <code data-language="csharp">const string sql = "UPDATE Employees " +
+    "SET FirstName = @@FirstName, " +
+    "     LastName = @@LastName, " +
+    "        Email = @@Email, " +
+    " DepartmentId = @@DepartmentId " +
+    "     WHERE Id = @@Id";
+_db.ExecuteSql(sql, employee);
+</code>
+        </pre>
+    </div>
+</div>

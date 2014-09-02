@@ -1,0 +1,83 @@
+﻿<div class="jumbotron">
+    <h1>Dapper</h1>
+    <p class="lead text-muted">
+        Dapper is an object-relational mapping (ORM) solution for the Microsoft .NET platform:
+        it provides a framework for mapping an object-oriented domain model to a traditional
+        relational database. Its purpose is to relieve the developer from a significant portion of
+        relational data persistence-related programming tasks. Dapper is free as open source software
+        that is distributed under dual license, either the Apache License 2.0 or the MIT License.
+        <br /><br />
+        Dapper was started by Sam Saffron because of the N+1 and other performance issues with Entity framework.
+        Dapper was written for and is used by StackOverflow.
+    </p>
+    <p>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="http://www.infoq.com/news/2011/04/dapper-released" class="btn btn-primary">Learn more &raquo;</a>
+            </div>
+            <div class="col-md-offset-8">
+                <a href="@Url.Action("InsightDatabase", "Home")" class="right btn btn-success">Dapper is pretty cool, what else?</a>
+            </div>
+        </div>
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-success">Advantages to using Dapper</h2>
+        <ul>
+            <li><b>A single file! (available via nuget)</b></li>
+            <li>List Support</li>
+            <li>Hailed as performance king (but is it?)</li>
+            <li>Multiple Result Sets</li>
+            <li>Stored Procedure support</li>
+            <li>Vendor agnostic</li>
+            <li>Multi mapping</li>
+            <li>Parameterized queries</li>
+            <li>No mapping code!</li>
+            <li>Uses dynamic method generation (MSIL) to assign column values to properties</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-xs-offset-1" href="https://code.google.com/p/dapper-dot-net">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-1">&nbsp;</div>
+    <div class="col-md-5">
+        <h2 class="text-danger">Disadvantages to using Dapper</h2>
+        <ul>
+            <li>Caching (could lead to memory issues)</li>
+            <li>No identity map</li>
+            <li><b>No specific helpers for Update/Select/Insert/Delete</b></li>
+            <li>Assumes connection is open and no other conflicting connections</li>
+            <li>Requires using statement for multiple results</li>
+            <li>Requires .NET 4</li>
+            <li>Have to implement more advanced funtionality yourself (i.e. Paging)</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-1" href="http://www.mindscapehq.com/blog/index.php/2011/12/05/5-reasons-not-to-use-a-micro-orm/">Learn more &raquo;</a></p>
+    </div>
+</div>
+<div class="page-header">
+    <h2>Code examples</h2>
+</div>
+<h4>Open Connection</h4>
+    <pre>
+        <code data-language="csharp">var _db = new SqlConnection(ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString);</code>
+    </pre>
+<h4>GetById()</h4>
+    <pre>
+        <code data-language="csharp">return _db.Query&lt;Employee&gt;("SELECT * FROM Employees WHERE Id = @@Id", new { @@Id = employeeId }).SingleOrDefault();</code>
+    </pre>
+<h4>GetAll()</h4>
+    <pre>
+        <code data-language="csharp">return _db.Query&lt;Employee&gt;("SELECT * FROM Employees").ToList();</code>
+    </pre>
+<h4>Add()</h4>
+<pre>
+    <code data-language="csharp">const string sql = "INSERT INTO Employees (FirstName, LastName, Email, DepartmentId)" +
+        "VALUES (@@FirstName, @@LastName, @@Email, @@DepartmentId);" +
+        "SELECT CAST(SCOPE_IDENTITY() as int)";
+var id = _db.Query&lt;int&gt;(sql, employee).Single();
+employee.Id = id;</code>
+</pre>
+<h4>Update()</h4>
+<pre>
+    <code data-language="csharp">_db.Execute("UPDATE Addresses SET StreetAddress = @@StreetAddress, " + 
+    "City = @@City, StateId = @@StateId, ZipCode = @@ZipCode WHERE Id = @@Id", address);</code>
+</pre>

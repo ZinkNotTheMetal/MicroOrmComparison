@@ -1,0 +1,47 @@
+﻿<div class="jumbotron">
+    <h1>Micro-ORMs</h1>
+    <p class="lead text-muted">
+        A few smart people realised that perhaps trying to do away with SQL all together was perhaps not such a great idea. 
+        Whilst SQL is undoubtedly an ugly and inconsistent language it still is often, for better or worse, the best option 
+        for querying relational databases. But mapping data to objects is still tedious, you'd agree, and does seem like a 
+        candidate for some kind of automation. This is where the micro ORM comes in - it strips down the traditional heavy-weight 
+        ORM to its core and throws away the complexity (think data contexts, XML mapping files, learning new query languages)
+    </p>
+    <p>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="http://www.diplo.co.uk/blog/2011/8/15/small-is-beautiful-net-micro-orms.aspx" class="btn btn-primary">Small is beautiful &raquo;</a>
+            </div>
+            <div class="col-md-offset-10">
+                <a href="@Url.Action("Handrolled", "Home")" class="right btn btn-success">Why not ADO.NET?</a>
+            </div>
+        </div>
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <h2 class="text-success">Advantages to using a Micro-ORM</h2>
+        <ul>
+            <li><b>Productivity</b></li>
+            <li>Performance (compared to a full ORM tool)</li>
+            <li>Less Complex</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-2" href="http://programmers.stackexchange.com/a/120462">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+        <h2 class="text-danger">Disadvantages to using a Micro-ORM</h2>
+        <ul>
+            <li>Does not support:
+                <ul>
+                    <li>Caching</li>
+                    <li>Change tracking</li>
+                    <li>Lazy loading</li>        
+                </ul>
+            </li>
+            <li>Different Mapping Strategies are needed for some (class per table)</li>
+            <li>No built-in transaction management</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-2" href="http://stackoverflow.com/a/12735194/3373373">Learn more &raquo;</a></p>
+    </div>
+</div>

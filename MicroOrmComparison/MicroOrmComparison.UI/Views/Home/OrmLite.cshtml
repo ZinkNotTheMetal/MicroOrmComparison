@@ -1,0 +1,77 @@
+﻿<div class="jumbotron">
+    <h1>OrmLite for .NET</h1>
+    <p class="lead text-muted">
+        OrmLite is a set of light-weight C# extension methods around System.Data.* interfaces which is designed 
+        to persist POCO classes with a minimal amount of intrusion and configuration. Map a POCO class 1:1 to 
+        an RDBMS table, cleanly by conventions, without any attributes required.
+    </p>
+    <p>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="https://github.com/ServiceStack/ServiceStack.OrmLite" class="btn btn-primary">Learn more &raquo;</a>
+            </div>
+            <div class="col-md-offset-7">
+                <a href="@Url.Action("SimpleData", "Home")" class="right btn btn-success">Pretty neat, but I need an ORM that's going to blow my mind.</a>
+            </div>
+        </div>
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-success">Advantages to using OrmLite</h2>
+        <ul>
+            <li><b>Productivity</b></li>
+            <li>Light-weight</li>
+            <li>Create/Drop Table schemas using nothing but POCO class definitions</li>
+            <li>High performance with support for indexes, text blobs, etc</li>
+            <li>Expressive power and flexibility</li>
+            <li>1 class = 1 table</li>
+            <li>Numerous extension methods including Select, Insert, Update, Delete</li>
+            <li>Available via nuget</li>
+            <li>T4 template support (integrated)</li>
+            <li>Transaction support</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-2" href="http://stackoverflow.com/questions/2300976/what-is-the-actual-benefit-of-ado-net-entity-framework">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-1">&nbsp;</div>
+    <div class="col-md-5">
+        <h2 class="text-danger">Disadvantages to using OrmLite</h2>
+        <ul>
+            <li>Dirty POCOs (annotations)</li>
+            <li>Mapping needed if trying to keep POCO clean</li>
+            <li>Each model must have a single primary key</li>
+            <li>Can require a lot of annotations</li>
+            <li>Need aliasing if anything differs from database and POCO</li>
+            <li>Brittle to schema changes (from my Database First experience)</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-2" href="http://lostechies.com/jimmybogard/2012/07/20/choosing-an-orm-strategy/">Learn more &raquo;</a></p>
+    </div>
+</div>
+<div class="page-header">
+    <h2>Code examples</h2>
+</div>
+<h4>Open Connection</h4>
+    <pre>
+        <code data-language="csharp">var dbFactory =
+    new OrmLiteConnectionFactory(ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString, SqlServerDialect.Provider);
+var _db = dbFactory.OpenDbConnection();</code>
+    </pre>
+<h4>GetById()</h4>
+    <pre>
+        <code data-language="csharp">return _db.Where&lt;Employee&gt;(new { Id = employeeId }).SingleOrDefault();</code>
+    </pre>
+<h4>GetAll()</h4>
+    <pre>
+        <code data-language="csharp">return _db.Select&lt;Employee&gt;();</code>
+    </pre>
+<h4>Add()</h4>
+    <pre>
+        <code data-language="csharp">_db.InsertOnly(employee,
+    x => x.Insert(emp => new {emp.FirstName, emp.LastName, emp.Email, emp.DepartmentId}));
+employee.Id = (int) _db.LastInsertId();</code>
+    </pre>
+<h4>Update()</h4>
+    <pre>
+        <code data-language="csharp">_db.Update(employee);</code>
+    </pre>
+

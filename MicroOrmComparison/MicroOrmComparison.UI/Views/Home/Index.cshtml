@@ -1,0 +1,49 @@
+﻿<div class="jumbotron">
+    <h1>Object Relational Mappers</h1>
+    <p class="lead text-muted">Object-relational mapping (ORM, O/RM, and O/R mapping) in computer software is a programming technique for converting data between incompatible type systems in object-oriented programming languages. This creates, in effect, a "virtual object database" that can be used from within the programming language.</p>
+    <p>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="http://en.wikipedia.org/wiki/Object-relational_mapping" class="btn btn-primary">Learn more &raquo;</a>        
+            </div>
+            <div class="col-md-offset-8">
+                <a href="@Url.Action("Entity", "Home")" class="right btn btn-success">I've heard about Entity</a>    
+            </div>
+        </div>
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-success">Advantages to using an ORM</h2>
+        <ul>
+            <li><b>Productivity</b></li>
+            <li>Provides dedicated functionality for CRUD operations</li>
+            <li>Easy to understand and follow all database relationships (1 to 1, 1 to many, many to many, many to 1)</li>
+            <li>Can reduce code (debatable by some for complex scenarios)</li>
+            <li>Make working with objects from the database easier</li>
+            <li>Abstracting database (if you're into that sort of thing)</li>
+            <li>Lots of features within the tool (Database First, Code First, Model First)</li>
+            <li>The code is well maintained and tested</li>
+            <li>Change tracking</li>
+            <li>Lazy Loading</li>
+            <li>Caching support</li>
+            <li><a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>: You write your data model in only one place, it's easier to update, maintain and reuse the code.</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-2" href="http://stackoverflow.com/a/2301604/3373373">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-1">&nbsp;</div>
+    <div class="col-md-5">
+        <h2 class="text-danger">Disadvantages to using an ORM</h2>
+        <ul>
+            <li>Another API to learn</li>
+            <li>Debugging and tuning can be difficult</li>
+            <li>Lots of Generated magic code (new in EF5 & EF6)</li>
+            <li>Encapsulation with different properties and tables can be difficult unless using code first</li>
+            <li>Complex when working with a large application</li>
+            <li>Brittle to schema changes (from my Database First example)</li>
+            <li>Security</li>
+            <li><b>Performance</b></li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-2" href="http://stackoverflow.com/questions/194147/are-there-good-reasons-not-to-use-an-orm">Learn more &raquo;</a></p>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+﻿<div class="jumbotron">
+    <h1>Simple.Data</h1>
+    <p class="lead text-muted">
+        Simple.Data is a lightweight framework that uses the dynamic features of .NET  to provide an expressive, ORM-ish 
+        way of accessing and manipulating data without any of the code pre-generation and boilerplate required by other 
+        frameworks.
+    </p>
+    <p class="text-muted">
+        Why not just write: <br/>
+        Database.Open().Employees.FindAllByEmployeeId(employeeId).FirstOrDefault(); <br/>
+        And take the rest of the morning off?
+    </p>
+    <p>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="http://simplefx.org/simpledata/docs" class="btn btn-primary">Learn more &raquo;</a>
+            </div>
+            <div class="col-md-offset-8">
+                <a href="@Url.Action("Contact", "Home")" class="right btn btn-success">Awesome!</a>
+            </div>
+        </div>
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-success">Advantages to using Simple.Data</h2>
+        <ul>
+            <li><b>Dynamic</b></li>
+            <li>Lazy and Eager loading supported</li>
+            <li>Very small code to perform complex queries.</li>
+            <li>Naming convention which is available online (similar to an API)</li>
+            <li>Stored procedure support</li>
+            <li>Transaction support</li>
+            <li>Simple.Data v2 is coming soon</li>
+            <li>Coolness factor</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-2" href="http://stackoverflow.com/questions/2300976/what-is-the-actual-benefit-of-ado-net-entity-framework">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-1">&nbsp;</div>
+    <div class="col-md-5">
+        <h2 class="text-danger">Disadvantages to using Simple.Data</h2>
+        <ul>
+            <li>Difficult to debug</li>
+            <li>Vendor specific</li>
+            <li>Requires .NET 4</li>
+            <li>Documentation is weak</li>
+            <li>Need aliasing if anything differs from database and POCO</li>
+            <li>Brittle to schema changes (from my Database First example)</li>
+            <li><b>No intellisense in the IDE</b></li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-2" href="http://lostechies.com/jimmybogard/2012/07/20/choosing-an-orm-strategy/">Learn more &raquo;</a></p>
+    </div>
+</div>
+<div class="page-header">
+    <h2>Code examples</h2>
+</div>
+<h4>Open Connection</h4>
+    <pre>
+        <code data-language="csharp">var _db = Database.OpenNamedConnection("EmployeeDb");</code>
+    </pre>
+<h4>GetById()</h4>
+    <pre>
+        <code data-language="csharp">Employee employee = _db.Employees.FindById(employeeId);
+    return employee;</code>
+    </pre>
+<h4>GetAll()</h4>
+    <pre>
+        <code data-language="csharp">List&lt;Employee&gt; employees = _db.Employees.All();
+    return employees;</code>
+    </pre>
+<h4>Add()</h4>
+    <pre>
+        <code data-language="csharp">Employee addedContact = _db.Employees.Insert(employee);
+    employee.Id = addedContact.Id;</code>
+    </pre>
+<h4>Update()</h4>
+<pre>
+        <code data-language="csharp">_db.Employees.Update(employee);</code>
+    </pre>
+<h4>Complicated Join (Assigned Roles)</h4>
+    <pre>
+        <code data-language="csharp">List&lt;Role&gt; assignedRoles = _db.Role.WithAssignedRoles()
+    .Where(_db.AssignedRoles.EmployeeId == employeeId)
+    .Where(_db.AssignedRoles.RoleId == _db.Role.Id)
+    .Select(_db.Role.Id, _db.Role.Name);</code>    
+    </pre>

@@ -1,0 +1,88 @@
+﻿<div class="jumbotron">
+    <h1>Entity Framework 6</h1>
+    <p class="lead text-muted">
+        Entity Framework is an object-relational mapper (ORM) that reduces the impedance mismatch between 
+        the object-oriented world of .NET Framework developers and the world of relational databases. It 
+        enables developers to primarily interact with an application’s conceptual model, using familiar 
+        object-oriented techniques. In Entity Framework you can work with data in the form of domain-specific 
+        objects and properties, such as customers and customer addresses, without having to concern yourself 
+        with the underlying database tables and columns where this data is stored. Developers can issue data 
+        access operations against the conceptual model, and Entity Framework translates the operations into 
+        relational database actions.
+    </p>
+    <p>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="http://msdn.microsoft.com/en-US/data/jj590134" class="btn btn-primary">Learn more &raquo;</a>
+            </div>
+            <div class="col-md-offset-7">
+                <a href="@Url.Action("Dapper", "Home")" class="right btn btn-success">What about Micro ORMs? Isn't that why I'm here?</a>
+            </div>
+        </div>
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-success">Advantages to using EF</h2>
+        <ul>
+            <li>Reduced development time</li>
+            <li>Applications are freed from hard-coded SQL</li>
+            <li>Mappings between object model and storage-specific schema can change</li>
+            <li>LINQ & IntelliSense support</li>
+            <li>Allows a code first (with Migrations)</li>
+            <li>Integrates well into .NET application programming models</li>
+            <li>Stored Procedure support (new to EF6)</li>
+            <li>Open Source</li>
+            <li>Available as a Nuget package</li>
+            <li>A lot of generated code to alleviate boilerplate code</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-xs-offset-1" href="http://msdn.microsoft.com/en-us/data/aa937709.aspx">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-1">&nbsp;</div>
+    <div class="col-md-5">
+        <h2 class="text-danger">Disadvantages to using EF</h2>
+        <ul>
+            <li>.Attach() method is flakey</li>
+            <li>Dictates shape of Domain model</li>
+            <li>Initialization of Entity causes first call to be extremely slow</li>
+            <li><b>Performance!</b></li>
+            <li>1 class : 1 POCO (even with join table)</li>
+            <li>Some generated code can be difficult to change</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-1" href="http://www.bluecollarnerd.net/entity-framework-friend-or-foe/">Learn more &raquo;</a></p>
+    </div>
+</div>
+<div class="page-header">
+    <h2>Code examples</h2>
+</div>
+<h4>Open Connection</h4>
+    <pre>
+        <code data-language="csharp">using (var db = new EmployeeDb())</code>
+    </pre>
+<h4>GetById()</h4>
+<pre>
+<code data-language="csharp">using (var db = new EmployeeDb())
+    {
+        db.Configuration.LazyLoadingEnabled = false;
+        employee = db.Employees.FirstOrDefault(x => x.Id == employeeId);
+    }</code>
+    </pre>
+<h4>GetAll()</h4>
+    <pre>
+        <code data-language="csharp">using (var db = new EmployeeDb())
+    {
+        db.Configuration.LazyLoadingEnabled = false;
+        db.Employees.ToList();
+    }</code>
+    </pre>
+<h4>Add()</h4>
+    <pre>
+        <code data-language="csharp">using (var db = new EmployeeDb())
+    {
+        db.Employees.AddOrUpdate(employee);
+    }</code>
+    </pre>
+<h4>Update()</h4>
+    <pre>
+        <code data-language="csharp">Add(employee);</code>
+    </pre>

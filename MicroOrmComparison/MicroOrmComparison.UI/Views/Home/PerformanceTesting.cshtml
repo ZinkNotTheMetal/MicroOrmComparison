@@ -1,0 +1,191 @@
+﻿@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.ormTool').click(function(e) {
+                e.preventDefault();
+                $('#performanceResults').mask();
+                var linkSelected = $(this);
+                var id = linkSelected.data("ormtoolid");
+                var clearCacheSelection = $('#clearCacheSelection').val();
+                $.getJSON(linkSelected.attr('href') + '&clearCache='+clearCacheSelection, null, function (data) {
+                    
+                    $.each(data, function (key, val) {
+                        if (key == "GetById") {
+                            $('#getByIdResult_' + id).html(val);
+                        }
+                        if (key == "GetAll") {
+                            $('#getAllResult_' + id).html(val);
+                        }
+                        if (key == "Add") {
+                            $('#addResult_' + id).html(val);
+                        }
+                        if (key == "Update") {
+                            $('#updateResult_' + id).html(val);
+                        }
+                        if (key == "Remove") {
+                            $('#removeResult_' + id).html(val);
+                        }
+                        if (key == "GetFullInfo") {
+                            $('#getFullInfoResult_' + id).html(val);
+                        }
+                        if (key == "Average") {
+                            $('#averageResult_' + id).html(val);
+                        }
+                        success: {
+                            $('#performanceResults').unmask();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+}
+
+<div class="jumbotron">
+    <h1>Performance Testing</h1>
+    <p class="text-muted">
+        Click on the title of the grid to populate the time.
+    </p>
+    <table id="performanceResults" class="table table-striped table-hover table-bordered">
+        <thead>
+            <th>
+                Method Name
+            </th>
+            <th>
+                <a class="ormTool" data-ormtoolid="1" href="@Url.Action("EmployeeRepositoryResult", "Employee", new { ormTool = 1})">Dapper</a>
+            </th>
+            <th>
+                <a class="ormTool" data-ormtoolid="2" href="@Url.Action("EmployeeRepositoryResult", "Employee", new { ormTool = 2})">Entity</a>
+            </th>
+            <th>
+                <a class="ormTool" data-ormtoolid="3" href="@Url.Action("EmployeeRepositoryResult", "Employee", new { ormTool = 3})">Hand-rolled with Stored Procedures</a>
+            </th>
+            <th>
+                <a class="ormTool" data-ormtoolid="4" href="@Url.Action("EmployeeRepositoryResult", "Employee", new { ormTool = 4})">Hand-rolled using SQL</a>
+            </th>
+            <th>
+                <a class="ormTool" data-ormtoolid="5" href="@Url.Action("EmployeeRepositoryResult", "Employee", new { ormTool = 5})">Insight.Database using Sprocs</a>
+            </th>
+            <th>
+                <a class="ormTool" data-ormtoolid="6" href="@Url.Action("EmployeeRepositoryResult", "Employee", new { ormTool = 6})">Insight.Database using SQL</a>                
+            </th>
+            <th>
+                <a class="ormTool" data-ormtoolid="7" href="@Url.Action("EmployeeRepositoryResult", "Employee", new { ormTool = 7})">OrmLite</a>
+            </th>
+            <th>
+                <a class="ormTool" data-ormtoolid="8" href="@Url.Action("EmployeeRepositoryResult", "Employee", new { ormTool = 8})">Simple.Data</a>
+            </th>
+        </thead>
+        <tbody id="resultTableBody">
+            <tr>
+                <td>
+                    GetById()
+                </td>
+                <td id="getByIdResult_1"></td>
+                <td id="getByIdResult_2"></td>
+                <td id="getByIdResult_3"></td>
+                <td id="getByIdResult_4"></td>
+                <td id="getByIdResult_5"></td>
+                <td id="getByIdResult_6"></td>
+                <td id="getByIdResult_7"></td>
+                <td id="getByIdResult_8"></td>
+            </tr>
+            <tr>
+                <td>
+                    GetAll()
+                </td>
+                <td id="getAllResult_1"></td>
+                <td id="getAllResult_2"></td>
+                <td id="getAllResult_3"></td>
+                <td id="getAllResult_4"></td>
+                <td id="getAllResult_5"></td>
+                <td id="getAllResult_6"></td>
+                <td id="getAllResult_7"></td>
+                <td id="getAllResult_8"></td>
+            </tr>
+            <tr>
+                <td>
+                    Add()
+                </td>
+                <td id="addResult_1"></td>
+                <td id="addResult_2"></td>
+                <td id="addResult_3"></td>
+                <td id="addResult_4"></td>
+                <td id="addResult_5"></td>
+                <td id="addResult_6"></td>
+                <td id="addResult_7"></td>
+                <td id="addResult_8"></td>
+            </tr>
+            <tr>
+                <td>
+                    Update()
+                </td>
+                <td id="updateResult_1"></td>
+                <td id="updateResult_2"></td>
+                <td id="updateResult_3"></td>
+                <td id="updateResult_4"></td>
+                <td id="updateResult_5"></td>
+                <td id="updateResult_6"></td>
+                <td id="updateResult_7"></td>
+                <td id="updateResult_8"></td>
+            </tr>
+            <tr>
+                <td>
+                    Remove()
+                </td>
+                <td id="removeResult_1"></td>
+                <td id="removeResult_2"></td>
+                <td id="removeResult_3"></td>
+                <td id="removeResult_4"></td>
+                <td id="removeResult_5"></td>
+                <td id="removeResult_6"></td>
+                <td id="removeResult_7"></td>
+                <td id="removeResult_8"></td>
+            </tr>
+            <tr>
+                <td>
+                    GetFullEmployeeInfo()
+                </td>
+                <td id="getFullInfoResult_1"></td>
+                <td id="getFullInfoResult_2"></td>
+                <td id="getFullInfoResult_3"></td>
+                <td id="getFullInfoResult_4"></td>
+                <td id="getFullInfoResult_5"></td>
+                <td id="getFullInfoResult_6"></td>
+                <td id="getFullInfoResult_7"></td>
+                <td id="getFullInfoResult_8"></td>
+            </tr>
+            <tr>
+                <td>
+                    Average
+                </td>
+                <td id="averageResult_1"></td>
+                <td id="averageResult_2"></td>
+                <td id="averageResult_3"></td>
+                <td id="averageResult_4"></td>
+                <td id="averageResult_5"></td>
+                <td id="averageResult_6"></td>
+                <td id="averageResult_7"></td>
+                <td id="averageResult_8"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="col-lg-offset-9">
+        <label>Allow SQL Caching: </label>
+        <select id="clearCacheSelection">
+            <option value="true">No</option>
+            <option value="false">Yes</option>
+        </select>
+    </div>
+</div>
+
+<div>
+    <h5>Versions:</h5>
+    <h6>Dapper: 1.34</h6>
+    <h6>Entity Framework: 6.1.1</h6>
+    <h6>Insight.Database: 4.2.6</h6>
+    <h6>OrmLite: 4.0.30</h6>
+    <h6>Simple.Data: 0.19.0.0</h6>
+</div>

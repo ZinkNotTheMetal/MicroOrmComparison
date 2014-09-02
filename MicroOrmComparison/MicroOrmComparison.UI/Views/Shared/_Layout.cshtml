@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Micro-ORM Comparison</title>
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Styles/jQLM")
+        @Styles.Render("~/Styles/rainbow")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Micro-ORM Comparison", "Index", "Home", null, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("About Micro ORMs", "AboutMicroOrms", "Home")</li>
+                        <li>@Html.ActionLink("Hand-rolled ADO.NET", "Handrolled", "Home")</li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">ORM tools used <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Dapper", "Dapper", "Home")</li>
+                                <li>@Html.ActionLink("Entity Framework", "Entity", "Home")</li>
+                                <li>@Html.ActionLink("Insight.Database", "InsightDatabase", "Home")</li>
+                                <li>@Html.ActionLink("OrmLite", "OrmLite", "Home")</li>
+                                <li>@Html.ActionLink("Simple.Data", "SimpleData", "Home")</li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Performance Testing", "PerformanceTesting", "Home")</li>
+                        <li>@Html.ActionLink("Contact Me", "Contact", "Home")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/Scripts/rainbow")
+        @Scripts.Render("~/Scripts/jQLM")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

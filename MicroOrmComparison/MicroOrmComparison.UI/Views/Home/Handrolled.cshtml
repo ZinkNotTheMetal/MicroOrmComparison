@@ -1,0 +1,53 @@
+﻿<div class="jumbotron">
+    <h1>ADO.NET using stored procedures</h1>
+    <p class="lead text-muted">
+        A stored procedure is a subroutine available to applications that access a relational database system.
+        <br />
+        <br />
+        A stored procedure (sometimes called a proc, sproc, StoPro, StoredProc, sp or SP) is actually stored in
+        the database data dictionary. Typical use for stored procedures include data validation (integrated into
+        the database) or access control mechanisms. Furthermore, stored procedures can consolidate and centralize
+        logic that was originally implemented in applications. Extensive or complex processing that requires
+        execution of several SQL statements is moved into stored procedures, and all applications call the
+        procedures. One can use nested stored procedures by executing one stored procedure from within another.        
+    </p>
+    <p>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="http://en.wikipedia.org/wiki/Stored_procedure" class="btn btn-primary">Learn more &raquo;</a>
+            </div>
+            <div class="col-md-offset-8">
+                <a href="@Url.Action("Dapper", "Home")" class="right btn btn-success">Ok, you have convinced me. What about Dapper?</a>
+            </div>
+        </div>
+    </p>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <h2 class="text-success">Advantages to using stored procedures with hand-rolled code</h2>
+        <ul>
+            <li><b>Only tool to feed to SQL Server Reporting Services (SSRS)</b></li>
+            <li>Works with data warehousing / ETL (Extract, Transform, Load) / Data aggregation</li>
+            <li>Performs queries where LINQ is lacking</li>
+            <li>Run directly within the database engine (reduces network traffic)</li>
+            <li>Performs a lot of complex SQL from a small set of input</li>
+            <li>Handles bulk inserts (more easily)</li>
+            <li>Prevents reverse engineering</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-1" href="http://sqlblog.com/blogs/paul_nielsen/archive/2009/05/09/why-use-stored-procedures.aspx">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md-5">
+        <h2 class="text-danger">Disadvantages to using stored procedures with hand-rolled code</h2>
+        <ul>
+            <li><b>More Hand-written code (ADO.NET as well as the stored procedure)</b></li>
+            <li>Having to map between SQL types and .NET types</li>
+            <li>Logic can easily sneak into Stored Procedures</li>
+            <li>Vendor specific (MS SQL, Oracle, MySQL)</li>
+            <li>No intellisense in the IDE</li>
+            <li>Stored procedures multiply very easily</li>
+            <li>Errors are harder to debug</li>
+        </ul>
+        <p><a class="btn btn-primary btn-sm col-md-offset-1" href="http://kevinlawry.wordpress.com/2012/08/07/why-i-avoid-stored-procedures-and-you-should-too/">Learn more &raquo;</a></p>
+    </div>
+</div>
