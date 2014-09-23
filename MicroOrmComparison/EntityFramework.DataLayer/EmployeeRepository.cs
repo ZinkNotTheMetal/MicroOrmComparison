@@ -7,17 +7,9 @@ namespace EntityFramework.DataLayer
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        public EmployeeRepository(bool clearCache = false)
+        public EmployeeRepository()
         {
             Automapper.AutoMapperConfigurator.CreateMaps();
-
-            if (clearCache)
-            {
-                using (var db = new EmployeeDb())
-                {
-                    db.Database.ExecuteSqlCommand("CHECKPOINT;DBCC FREEPROCCACHE;DBCC DROPCLEANBUFFERS");
-                }
-            }
         }
 
         public MicroOrmComparison.UI.Models.Employee GetById(int employeeId)

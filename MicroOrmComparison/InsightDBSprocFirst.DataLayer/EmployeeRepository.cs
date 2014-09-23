@@ -13,13 +13,7 @@ namespace InsightDBSprocFirst.DataLayer
     public class EmployeeRepository : IEmployeeRepository
     {
         readonly IDbConnection _db = new SqlConnection(ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString);
-
-        public EmployeeRepository(bool clearCache = false)
-        {
-            if (clearCache)
-                _db.ExecuteSql("CHECKPOINT;DBCC FREEPROCCACHE;DBCC DROPCLEANBUFFERS");
-        }
-
+        
         public Employee GetById(int employeeId)
         {
             return _db.Single<Employee>("GetEmployeeById", new {@Id = employeeId});

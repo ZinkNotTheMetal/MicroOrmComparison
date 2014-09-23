@@ -17,9 +17,6 @@ namespace InsightDB.DataLayer
         public EmployeeRepository(bool clearCache = false)
         {
             _db = new SqlConnection(ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString);
-            
-            if(clearCache)
-                _db.ExecuteSql("CHECKPOINT;DBCC FREEPROCCACHE;DBCC DROPCLEANBUFFERS");
         }
 
 

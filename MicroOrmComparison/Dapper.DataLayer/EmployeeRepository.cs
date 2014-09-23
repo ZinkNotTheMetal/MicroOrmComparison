@@ -13,14 +13,9 @@ namespace Dapper.DataLayer
     {
         private readonly IDbConnection _db;
 
-        public EmployeeRepository(bool clearCache = false)
+        public EmployeeRepository()
         {
             _db = new SqlConnection(ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString);
-
-            if (clearCache)
-            {
-                _db.Execute("CHECKPOINT;DBCC FREEPROCCACHE;DBCC DROPCLEANBUFFERS");
-            }
         } 
 
         public Employee GetById(int employeeId)

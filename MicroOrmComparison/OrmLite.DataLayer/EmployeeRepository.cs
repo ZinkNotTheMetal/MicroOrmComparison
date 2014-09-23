@@ -15,13 +15,10 @@ namespace OrmLite.DataLayer
     {
         private readonly IDbConnection _db;
 
-        public EmployeeRepository(bool clearCache = false)
+        public EmployeeRepository()
         {
             _db = CreateDbConnection();
             AutoMapperConfigurator.CreateMaps();
-
-            if(clearCache)
-                _db.ExecuteSql("CHECKPOINT;DBCC FREEPROCCACHE;DBCC DROPCLEANBUFFERS");
         }
 
         private static IDbConnection CreateDbConnection()

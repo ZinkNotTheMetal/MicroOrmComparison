@@ -13,29 +13,7 @@ namespace HardCodedDataAccessWithSprocs.DataLayer
     public class EmployeeRepository : IEmployeeRepository
     {
         readonly string _connectionString = ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString;
-
-        public EmployeeRepository(bool clearCache = false)
-        {
-            if (clearCache)
-            {
-                using (var connection = new SqlConnection(_connectionString))
-                {
-                    var command = new SqlCommand("CHECKPOINT;DBCC FREEPROCCACHE;DBCC DROPCLEANBUFFERS", connection);
-                    try
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
-                    catch (Exception)
-                    {
-                        
-                        throw;
-                    }
-                }
-            }
-        }
-
+        
         public Employee GetById(int employeeId)
         {
             Employee employee = null;

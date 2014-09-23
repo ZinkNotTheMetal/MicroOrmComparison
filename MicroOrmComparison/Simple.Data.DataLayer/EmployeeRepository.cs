@@ -11,28 +11,9 @@ namespace Simple.Data.DataLayer
     {
         private readonly dynamic _db;
 
-        public EmployeeRepository(bool clearCache=false)
+        public EmployeeRepository()
         {
-            _db = Database.OpenNamedConnection("EmployeeDb");
-
-            if (clearCache)
-            {
-                using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["EmployeeDB"].ConnectionString))
-                {
-                    var command = new SqlCommand("CHECKPOINT;DBCC FREEPROCCACHE;DBCC DROPCLEANBUFFERS", connection);
-                    try
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        connection.Close();
-                    }
-                    catch (Exception)
-                    {
-
-                        throw;
-                    }
-                }
-            }
+            _db = Database.OpenNamedConnection("EmployeeDB");
         }
 
         public Employee GetById(int employeeId)
